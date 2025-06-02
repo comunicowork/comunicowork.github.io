@@ -7,7 +7,7 @@
   <meta name="description" content="Comunitega - Impulsa tu empresa al siguiente nivel con servicios profesionales de marketing digital, desarrollo web y e-commerce.">
   <meta name="keywords" content="marketing digital, agencia de marketing, presencia online, SEO, SEM, Desarrollo Web, Redes Sociales, Automatización, Chatbots, E-commerce">
   <meta name="theme-color" content="#02b602">
-  <link rel="icon" href="/imagenes para git.html/logo_circulo.webp" type="image/webp">
+  <link rel="icon" href="/pruebas_carlos/imagenes para git.html/logo_circulo.webp" type="image/webp">
 
   <!-- Preconnect para fuentes externas (mejor rendimiento fuentes Google) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -142,7 +142,6 @@
       box-shadow: none;
     }
 
-    /* CLS: min-height y aspect-ratio explícito para reservar espacio en hero-section */
     .hero-section {
       display: flex;
       flex-direction: column;
@@ -158,62 +157,12 @@
       z-index: 1;
       box-shadow: 0 2px 35px 0 #02b60213;
     }
-    .hero-section h1,
-    .hero-section p {
-      font-family: 'Inter', Arial, Helvetica, sans-serif;
-    }
-    .hero-section h1 {
-      font-size: clamp(3.5rem, 9vw, 5.2rem);
-      font-weight: 900;
-      color: #005e00;
-      margin-bottom: 2rem;
-      position: relative;
-      z-index: 2;
-      letter-spacing: -1.5px;
-      text-shadow: 0 2px 8px #02b60212;
-      animation: fadeInDown 1s;
-      /* Forzar color oscuro en móviles */
-      word-break: break-word;    /* --- AÑADIDO para evitar overflow en móvil --- */
-      white-space: normal;       /* --- AÑADIDO para forzar salto de línea --- */
-      line-height: 1.15;         /* --- AÑADIDO para mejor visibilidad en móvil --- */
-      max-width: 100vw;          /* --- AÑADIDO para asegurar que no se oculte --- */
-    }
-    .hero-section p {
-      font-size: clamp(1.8rem, 3.5vw, 2.3rem);
-      color: #333;
-      max-width: 900px;
-      margin: 0 auto 2.8rem auto;
-      text-align: center;
-      line-height: 2.2;
-      animation: fadeIn 1.3s;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* --- CAMBIO: Unificar y corregir media queries para móviles y asegurar visibilidad del h1 --- */
     @media (max-width: 600px) {
       .hero-section {
-        min-height: 220px !important; /* CAMBIO: menos espacio vertical para móvil */
-        aspect-ratio: 1.2/1;
-        padding-top: 2.5rem;
-        padding-bottom: 1.5rem;
-      }
-      .hero-section h1 {
-        font-size: 2.2rem !important;   /* CAMBIO: Tamaño legible y visible */
-        color: #005e00 !important;
-        margin-bottom: 1.2rem;
-        line-height: 1.18 !important;
-        z-index: 2;
-        max-width: 97vw !important;  /* CAMBIO: asegurar visibilidad y evitar overflow */
-        word-break: break-word !important;
-        white-space: normal !important;
-        display: block !important;
-        overflow-wrap: break-word !important; /* --- NUEVO --- */
-      }
-      .hero-section p {
-        font-size: 1.13rem !important;
-        color: #232323;
-        z-index: 2;
+        min-height: 350px; /* was 320px, more space for content */
+        aspect-ratio: auto !important; /* Queda libre en móvil, evita límites raros */
+        padding-top: 2.2rem !important; /* Más espacio arriba */
+        padding-bottom: 1.4rem;
       }
     }
     .glow-orb {
@@ -252,7 +201,55 @@
       50% { opacity: 0.08;}
       100% { transform: translateY(-100vh) rotate(360deg); opacity: 0.3;}
     }
-    
+
+    .hero-section h1,
+    .hero-section p {
+      font-family: 'Inter', Arial, Helvetica, sans-serif;
+    }
+    .hero-section h1 {
+      font-size: clamp(3.5rem, 9vw, 5.2rem);
+      font-weight: 900;
+      color: #005e00;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 2; /* asegúrate que está sobre partículas y orb */
+      letter-spacing: -1.5px;
+      text-shadow: 0 2px 8px #02b60212;
+      animation: fadeInDown 1s;
+      line-height: 1.1;
+      border-radius: .7em;
+      padding: 0.17em 0.2em;
+      box-sizing: border-box;
+      /* Mejor contraste si el fondo es similar al texto */
+    }
+    /* Añadido: Mobile fix para asegurar visibilidad del h1 */
+    @media (max-width: 600px) {
+      .hero-section h1 {
+        font-size: 2.6rem !important; /* aumentado desde 2.5rem */
+        margin-bottom: 1.1rem;
+        margin-top: 0.45rem; /* de ser necesario */
+        line-height: 1.16;
+        padding: 0.25em 0.18em;
+        color: #005e00; /* Contraste mejorado */
+      }
+      .hero-section {
+        min-height: 350px !important;
+        padding-top: 2.2rem !important;
+        padding-bottom: 1.2rem;
+      }
+    }
+
+    .hero-section p {
+      font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+      color: #333;
+      max-width: 900px;
+      margin: 0 auto 2.8rem auto;
+      text-align: center;
+      line-height: 2.2;
+      animation: fadeIn 1.3s;
+      position: relative;
+      z-index: 1;
+    }
     .hero-section .btn-main {
       padding: 1.2rem 3rem;
       font-size: 1.65rem;
@@ -289,10 +286,9 @@
     }
     @media (max-width: 600px) {
       .navbar-brand img { width: 44px; height: 44px;}
-      .hero-section p { font-size: 1.25rem;}
-      .hero-section .btn-main { font-size: 1.21rem;}
+      .hero-section p { font-size: 1.21rem;}
+      .hero-section .btn-main { font-size: 1.12rem;}
     }
-
     .carrusel-section {
       max-width: 1200px;
       margin: 5rem auto;
