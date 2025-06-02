@@ -143,7 +143,7 @@
     }
 
     /* CLS: min-height y aspect-ratio explícito para reservar espacio en hero-section */
-    .hero-section {
+  .hero-section {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -158,11 +158,53 @@
       z-index: 1;
       box-shadow: 0 2px 35px 0 #02b60213;
     }
+    .hero-section h1,
+    .hero-section p {
+      font-family: 'Inter', Arial, Helvetica, sans-serif;
+    }
+    .hero-section h1 {
+      font-size: clamp(3.5rem, 9vw, 5.2rem);
+      font-weight: 900;
+      color: #005e00;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 2; /* CAMBIO: Subir z-index para estar sobre partículas/orb */
+      letter-spacing: -1.5px;
+      text-shadow: 0 2px 8px #02b60212;
+      animation: fadeInDown 1s;
+      /* CAMBIO: Forzar color oscuro en móviles */
+    }
+    .hero-section p {
+      font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+      color: #333;
+      max-width: 900px;
+      margin: 0 auto 2.8rem auto;
+      text-align: center;
+      line-height: 2.2;
+      animation: fadeIn 1.3s;
+      position: relative;
+      z-index: 2; /* CAMBIO */
+    }
+
+    /* CAMBIO: Unificar y corregir media queries para móviles */
     @media (max-width: 600px) {
       .hero-section {
-        min-height: 320px;
+        min-height: 340px; /* CAMBIO: Más espacio vertical */
         aspect-ratio: 1.2/1;
-        padding-top: 1.3rem;
+        padding-top: 2.5rem; /* CAMBIO: Más espacio arriba */
+        padding-bottom: 1.5rem;
+      }
+      .hero-section h1 {
+        font-size: 2.1rem;   /* CAMBIO: Tamaño legible, no excesivo */
+        color: #005e00 !important; /* CAMBIO: Forzar color oscuro para contraste */
+        margin-bottom: 1.2rem;
+        line-height: 1.15;
+        z-index: 2;
+      }
+      .hero-section p {
+        font-size: 1.15rem;
+        color: #232323;
+        z-index: 2;
       }
     }
     .glow-orb {
@@ -201,32 +243,7 @@
       50% { opacity: 0.08;}
       100% { transform: translateY(-100vh) rotate(360deg); opacity: 0.3;}
     }
-    .hero-section h1,
-    .hero-section p {
-      font-family: 'Inter', Arial, Helvetica, sans-serif;
-    }
-    .hero-section h1 {
-      font-size: clamp(3.5rem, 9vw, 5.2rem);
-      font-weight: 900;
-      color: #005e00;
-      margin-bottom: 2rem;
-      position: relative;
-      z-index: 1;
-      letter-spacing: -1.5px;
-      text-shadow: 0 2px 8px #02b60212;
-      animation: fadeInDown 1s;
-    }
-    .hero-section p {
-      font-size: clamp(1.8rem, 3.5vw, 2.3rem);
-      color: #333;
-      max-width: 900px;
-      margin: 0 auto 2.8rem auto;
-      text-align: center;
-      line-height: 2.2;
-      animation: fadeIn 1.3s;
-      position: relative;
-      z-index: 1;
-    }
+    
     .hero-section .btn-main {
       padding: 1.2rem 3rem;
       font-size: 1.65rem;
@@ -263,7 +280,6 @@
     }
     @media (max-width: 600px) {
       .navbar-brand img { width: 44px; height: 44px;}
-      .hero-section h1 { font-size: 2.5rem;}
       .hero-section p { font-size: 1.25rem;}
       .hero-section .btn-main { font-size: 1.21rem;}
     }
@@ -557,7 +573,6 @@
     }
 
     @media (max-width: 600px) {
-      .hero-section h1 {font-size: 3rem;}
       .hero-section p {font-size: 1.5rem;}
       .servicios-section, .about-section, .equipo-section { padding: 1.4rem 0.2rem; }
       .equipo-card { min-width: 105px; max-width: 130px; padding: 1rem 0.2rem; height: 210px; }
@@ -753,7 +768,7 @@
       <div class="particles" id="particles" aria-hidden="true"></div>
       <h1>Impulsamos tu empresa al siguiente nivel</h1>
       <p>
-        Somos <strong>Comunitega</strong>, agencia de marketing digital y desarrollo web. Ayudamos a empresas a crecer, optimizar su presencia digital y generar más clientes con diseño, tecnología y creatividad.
+        Somos <strong>Comunitega</strong>, agencia de marketing digital y desarrollo web. Ayudamos a empresas a crecer, optimizar su presencia digital y generar más clientes con diseño, tecnología y creatividad
       </p>
       <a href="#contacto" class="btn btn-main shadow" aria-label="Solicitar asesoría a Comunitega">Solicitar asesoría</a>
     </section>
