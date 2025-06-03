@@ -1031,7 +1031,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Reemplazar el video por un GIF en dispositivos iPhone/iOS
   if (esMovilApple()) {
     const gif = document.createElement('img');
-    gif.src = "/pruebas_carlos/videos_para_git_html/movil-git.gif";
+    gif.src = "/videos_para_git_html/movil-git.gif";
     gif.alt = "Bienvenida";
     gif.style = "width: 100vw; height: 100vh; object-fit: cover; background: #000; display: block;";
     overlay.replaceChild(gif, video);
@@ -1046,8 +1046,8 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     // Asignar el video según el dispositivo
     video.src = esMovil()
-      ? "/pruebas_carlos/videos_para_git_html/movil-git.mp4"
-      : "/pruebas_carlos/videos_para_git_html/VB-git.mp4";
+      ? "/videos_para_git_html/movil-git.mp4"
+      : "/videos_para_git_html/VB-git.mp4";
   }
 
   function intentarPlay() {
