@@ -1031,15 +1031,23 @@ document.addEventListener("DOMContentLoaded", function () {
   // Reemplazar el video por un GIF en dispositivos iPhone/iOS
   if (esMovilApple()) {
     const gif = document.createElement('img');
-    gif.src = "/videos_para_git_html/movil-git.gif";
+    gif.src = "/pruebas_carlos/videos_para_git_html/movil-git.gif";
     gif.alt = "Bienvenida";
     gif.style = "width: 100vw; height: 100vh; object-fit: cover; background: #000; display: block;";
     overlay.replaceChild(gif, video);
+
+    // Ocultar el GIF después de 9 segundos
+    setTimeout(() => {
+      overlay.style.opacity = 0;
+      overlay.style.pointerEvents = "none";
+      document.body.style.overflow = "";
+      document.body.classList.add('animaciones-activas');
+    }, 9000);
   } else {
     // Asignar el video según el dispositivo
     video.src = esMovil()
-      ? "/videos_para_git_html/movil-git.mp4"
-      : "/videos_para_git_html/VB-git.mp4";
+      ? "/pruebas_carlos/videos_para_git_html/movil-git.mp4"
+      : "/pruebas_carlos/videos_para_git_html/VB-git.mp4";
   }
 
   function intentarPlay() {
@@ -1119,7 +1127,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.style.overflow = "";
   }
 });
-  </script>
+</script>
   <!-- Bootstrap JS con defer -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
 </body>
