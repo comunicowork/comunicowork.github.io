@@ -1028,12 +1028,15 @@ document.addEventListener("DOMContentLoaded", function () {
     return /iPhone|iPad|iPod/i.test(navigator.userAgent);
   }
 
-  // Asignar el video según el dispositivo
-  video.src = esMovilApple()
-    ? "/videos_para_git_html/movil-git.mp4"
-    : esMovil()
-    ? "/videos_para_git_html/movil-git.mp4"
-    : "/videos_para_git_html/VB-git.mp4";
+  // Asignar el video o GIF según el dispositivo
+  if (esMovilApple()) {
+    video.src = "/videos_para_git_html/movil_git.gif";
+    video.type = "image/gif"; // Especificar el tipo de contenido para el GIF
+  } else if (esMovil()) {
+    video.src = "/videos_para_git_html/movil_git.mp4";
+  } else {
+    video.src = "/videos_para_git_html/VB-git.mp4";
+  }
 
   function intentarPlay() {
     video.muted = true;
