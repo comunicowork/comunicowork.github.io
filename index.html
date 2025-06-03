@@ -1031,7 +1031,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Asignar el video o GIF según el dispositivo
   if (esMovilApple()) {
     video.src = "/videos_para_git_html/movil-git.gif";
-
+    video.type = "image/gif"; // Especificar el tipo de contenido para el GIF
   } else if (esMovil()) {
     video.src = "/videos_para_git_html/movil-git.mp4";
   } else {
