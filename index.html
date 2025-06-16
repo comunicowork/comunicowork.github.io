@@ -1326,94 +1326,129 @@ textarea.contacto-input::placeholder {
 
 <!---------- VIDEO DE BIENVENIDA SOLO 1ra VEZ ---------->
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const overlay = document.getElementById('intro-video-overlay');
-      const video = document.getElementById('intro-video');
-      const tapMsg = document.getElementById('tap-to-play-msg');
-      const sessionKey = 'videoBienvenidaVisto-v3';
-    
-      // Función para detectar si es un dispositivo móvil
-      function esMovil() {
-        return /Android|webOS|BlackBerry|Windows Phone|Opera Mini|IEMobile/i.test(navigator.userAgent);
-      }
-    
-      // Función para detectar si es un dispositivo iOS
-      function esMovilApple() {
-        return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-      }
-    
-      // Función para ocultar el overlay
-      function quitarOverlay() {
-        overlay.style.opacity = 0;
-        overlay.style.pointerEvents = "none";
-        document.body.style.overflow = "";
-        document.body.classList.add('animaciones-activas');
-      }
-    
-      // Reemplazar el video por un GIF en dispositivos iPhone/iOS
-      if (esMovilApple()) {
-        const gif = document.createElement('img');
-        gif.src = "/videos_para_git_html/movil-git.gif";
-        gif.alt = "Bienvenida";
-        gif.style = "width: 100vw; height: 100vh; object-fit: cover; background: #000; display: block; cursor: pointer;";
-        overlay.replaceChild(gif, video);
-    
-        // Ocultar el GIF después de 9 segundos
-        setTimeout(() => {
-          quitarOverlay();
-        }, 9000);
-    
-        // Agregar evento de clic para ocultar el GIF
-        gif.addEventListener('click', quitarOverlay);
-      } else {
+document.addEventListener("DOMContentLoaded", function () {
+  const overlay = document.getElementById('intro-video-overlay');
+  const video = document.getElementById('intro-video');
+  const tapMsg = document.getElementById('tap-to-play-msg');
+  const sessionKey = 'videoBienvenidaVisto-v3';
 
-        // Haz esto:
-        video.src = "/videos_para_git_html/VB-git.mp4";
-    
-        // Agregar eventos para ocultar el video
-        video.addEventListener('click', quitarOverlay);
-        video.addEventListener('touchend', quitarOverlay);
-        overlay.addEventListener('click', quitarOverlay);
-      }
-    
-      function intentarPlay() {
-        if (!esMovilApple()) {
-          video.muted = true;
-          video.playsInline = true;
-          video.setAttribute('playsinline', '');
-          video.removeAttribute('controls');
-          let intento = video.play();
-          if (intento && intento.catch) intento.catch(() => {});
-        }
-      }
-    
-      if (!sessionStorage.getItem(sessionKey)) {
-        overlay.style.opacity = "1";
-        overlay.style.pointerEvents = "auto";
-        document.body.style.overflow = "hidden";
-        document.body.classList.remove('animaciones-activas');
-        if (!esMovilApple()) video.currentTime = 0;
-        intentarPlay();
-        setTimeout(function () {
-          if (!esMovilApple() && video.paused) {
-            tapMsg.style.display = "inline-block";
-            window.addEventListener("touchstart", intentarPlay, { once: true, passive: true });
-            window.addEventListener("mousedown", intentarPlay, { once: true, passive: true });
-          }
-        }, 500);
-        video.addEventListener('ended', quitarOverlay);
-        video.addEventListener('error', () => setTimeout(quitarOverlay, 4000));
-        document.addEventListener('keydown', function (e) {
-          if (e.key === "Escape" && overlay.style.opacity !== "0") {
-            quitarOverlay();
-          }
-        });
-        setTimeout(quitarOverlay, 15000);
-        sessionStorage.setItem(sessionKey, "1");
+  // Función para detectar si es un dispositivo móvil Apple
+  function esMovilApple() {
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  // Función para ocultar el overlay
+  function quitarOverlay() {
+    overlay.style.opacity = 0;
+    overlay.style.pointerEvents = "none";
+    document.body.style.overflow = "";
+    document.body.classList.add('animaciones-activas');
+  }
+
+  // Solo mostrar overlay si no se ha visto antes
+  if (!sessionStorage.getItem(sessionKey)) {
+    overlay.style.opacity = "1";
+    overlay.style.pointerEvents = "auto";
+    document.body.style.overflow = "hidden";
+    document.body.classList.remove('animaciones-activas');
+
+    if (esMovilApple()) {
+      // Reemplazar el video por un GIF en dispositivos iPhone/iOS
+      const gif = document.createElement('img');
+      gif.src = "/videos_para_git_html/movil-git.gif";
+      gif.alt = "Bienvenida";
+      gif.style.width = "100vw";
+      gif.style.height = "100vh";
+      gif.style.objectFit = "cover";
+      gif.style.background = "#000";
+      gif.style.display = "block";
+      gif.style.cursor = "pointer";
+      // Reemplaza el video por el GIF
+      const wrapper = overlay.querySelector('.intro-video-wrapper');
+      if (wrapper) {
+        wrapper.innerHTML = '';
+        wrapper.appendChild(gif);
       } else {
-        quitarOverlay();
+        overlay.replaceChild(gif, video);
       }
-    });
+
+      // Ocultar el GIF después de 9 segundos (duración del GIF)
+      const gifTimeout = setTimeout(() => {
+        quitarOverlay();
+      }, 9000);
+
+      // Ocultar el overlay al hacer click/tap en el GIF
+      gif.addEventListener('click', function () {
+        clearTimeout(gifTimeout);
+        quitarOverlay();
+      });
+      gif.addEventListener('touchend', function () {
+        clearTimeout(gifTimeout);
+        quitarOverlay();
+      });
+
+      // También permitir cerrar tocando cualquier parte del overlay
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) {
+          clearTimeout(gifTimeout);
+          quitarOverlay();
+        }
+      });
+
+    } else {
+      // Para otros dispositivos: video normal
+      video.src = "/videos_para_git_html/VB-git.mp4";
+      video.currentTime = 0;
+      video.muted = true;
+      video.playsInline = true;
+      video.setAttribute('playsinline', '');
+      video.removeAttribute('controls');
+      let intento = video.play();
+      if (intento && intento.catch) intento.catch(() => {});
+
+      // Ocultar overlay al terminar el video
+      video.addEventListener('ended', quitarOverlay);
+
+      // Ocultar overlay al hacer click/tap en el video o overlay
+      video.addEventListener('click', quitarOverlay);
+      video.addEventListener('touchend', quitarOverlay);
+      overlay.addEventListener('click', function (e) {
+        // Solo si el click es fuera del video
+        if (e.target === overlay) quitarOverlay();
+      });
+
+      // Si el video no se reproduce automáticamente, mostrar mensaje
+      setTimeout(function () {
+        if (video.paused) {
+          tapMsg.style.display = "inline-block";
+          window.addEventListener("touchstart", function handler() {
+            video.play().catch(()=>{});
+            window.removeEventListener("touchstart", handler);
+          }, { passive: true });
+          window.addEventListener("mousedown", function handler() {
+            video.play().catch(()=>{});
+            window.removeEventListener("mousedown", handler);
+          }, { passive: true });
+        }
+      }, 500);
+
+      // Ocultar overlay tras 15s por si acaso
+      setTimeout(quitarOverlay, 15000);
+
+      // Permitir cerrar con Escape
+      document.addEventListener('keydown', function (e) {
+        if (e.key === "Escape" && overlay.style.opacity !== "0") {
+          quitarOverlay();
+        }
+      });
+    }
+
+    // Marcar como visto para no mostrar de nuevo
+    sessionStorage.setItem(sessionKey, "1");
+  } else {
+    quitarOverlay();
+  }
+});
 
     document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("formContacto");
