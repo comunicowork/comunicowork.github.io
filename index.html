@@ -163,24 +163,38 @@
       0% { transform: translateY(0);}
       100% { transform: translateY(30px);}
     }
-    .particles {
+      .particles {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: 0;
       pointer-events: none;
+      overflow: hidden;
     }
+    
     .particle {
       position: absolute;
       background: var(--verde);
       border-radius: 50%;
       opacity: 0.3;
       animation: float 15s infinite linear;
+      will-change: transform, opacity;
     }
+    
     @keyframes float {
-      0% { transform: translateY(0) rotate(0deg); opacity: 0.3;}
-      50% { opacity: 0.08;}
-      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0.3;}
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.3;
+      }
+      50% {
+        opacity: 0.15;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0.3;
+      }
     }
     .hero-section h1 {
       font-size: clamp(3.5rem, 9vw, 5.2rem);
@@ -689,6 +703,207 @@
       }
     }
 
+    .contacto-section {
+  background: linear-gradient(135deg, #232946 60%, #121629 100%);
+  padding: 2.2rem 0 5.5rem 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.contacto-card {
+  background: rgba(255,255,255,0.10);
+  border-radius: 2.2rem;
+  box-shadow: 0 8px 32px 0 rgba(35,41,70,0.18), 0 1.5px 8px #23294633;
+  padding: 2.2rem 1.5rem 2.8rem 1.5rem;
+  text-align: center;
+  backdrop-filter: blur(10px) saturate(1.2);
+  border: 1.5px solid rgba(35,41,70,0.18);
+  position: relative;
+  overflow: hidden;
+}
+.contacto-card::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: -60px;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle at 40% 40%, #ffd70055 0%, transparent 80%);
+  z-index: 0;
+  filter: blur(12px);
+  opacity: .5;
+}
+.contacto-title {
+  color: #f8c37a;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 900;
+  margin-top: 0.2em;
+  margin-bottom: 1.2em;
+  letter-spacing: -1.2px;
+  line-height: 1.1;
+  text-shadow: 0 4px 24px #23294655, 0 1px 0 #f8c37a;
+  background: linear-gradient(90deg, #f8c37a 60%, #b8c1ec 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.contacto-desc {
+  color: #b8c1ec;
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  margin-bottom: 2.8rem;
+  font-weight: 500;
+  z-index: 1;
+  position: relative;
+}
+.contacto-form {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 700px;
+  z-index: 1;
+  position: relative;
+}
+.contacto-label {
+  color: #f8c37a;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-align: left;
+  display: block;
+  margin-bottom: 0.2em;
+  letter-spacing: 0.01em;
+  margin-left: 0.3em;
+}
+
+.contacto-input-group {
+  position: relative;
+  margin-bottom: 2.2rem;
+}
+.contacto-input {
+  font-size: 1.35rem;
+  border-radius: 1.2rem;
+  border: none;
+  padding: 1.25rem 1.1rem 1.25rem 3.2rem;
+  background: rgba(184,193,236,0.13);
+  color: #232946;
+  box-shadow: 0 2px 18px #ffb34722;
+  transition: box-shadow 0.21s, border 0.21s, background 0.21s;
+  width: 100%;
+  border: 2.5px solid transparent;
+  outline: none;
+  font-weight: 500;
+}
+.contacto-input:focus {
+  box-shadow: 0 2px 28px #ffb34755;
+  border: 2.5px solid #f8c37a;
+  background: #fff;
+}
+.contacto-input-group .input-icon {
+  position: absolute;
+  left: 1.1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  color: #f8c37a;
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.contacto-input::placeholder,
+  textarea.contacto-input::placeholder {
+  color: #f8c37a;
+  opacity: 1;
+  padding-left: 1.2em;
+}
+
+.contacto-input.error {
+  border: 2.5px solid #e63946;
+  background: #fff0f0;
+}
+.contacto-error-msg {
+  color: #e63946;
+  font-size: 1.05rem;
+  margin-top: 0.3em;
+  margin-left: 0.5em;
+  text-align: left;
+  min-height: 1.3em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  display: block;
+  transition: opacity 0.2s;
+}
+.contacto-btn {
+  font-size: 2rem;
+  padding: 1.2rem 0;
+  border-radius: 1.2rem;
+  background: linear-gradient(90deg, #b8c1ec 60%, #f8c37a 100%) !important;
+  border: none;
+  color: #232946;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  margin-top: 0.3rem;
+  margin-bottom: 1.7rem;
+  box-shadow: 0 2px 18px #ffb34733, 0 1.5px 8px #23294633;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  position: relative;
+  overflow: hidden;
+}
+.contacto-btn:before {
+  content: '';
+  position: absolute;
+  left: -100%;
+  top: 0; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, #fff8 60%, transparent);
+  transition: left 0.5s;
+  z-index: 1;
+}
+.contacto-btn:hover, .contacto-btn:focus {
+  background: linear-gradient(90deg, #f8c37a 60%, #b8c1ec 100%) !important;
+  transform: scale(1.04) translateY(-2px);
+  color: #232946;
+  box-shadow: 0 4px 32px #ffb34755;
+}
+.contacto-btn:hover:before, .contacto-btn:focus:before {
+  left: 100%;
+}
+#form-status {
+  font-size: 1.25rem;
+  font-weight: 700;
+  min-height: 1.5em;
+  color: #232946;
+  background: linear-gradient(90deg, #f8c37a 60%, #b8c1ec 100%);
+  border-radius: 0.7em;
+  padding: 0.8em 1.5em;
+  display: inline-block;
+  margin-top: 1.2em;
+  letter-spacing: 0.01em;
+  box-shadow: 0 2px 12px #ffb34733;
+  border: 2px solid #fff;
+}
+.contacto-input::placeholder {
+  color: #b8c1ec;
+  opacity: 1;
+  padding-left: 2rem;
+}
+textarea.contacto-input::placeholder {
+  color: #000000;
+  opacity: 1;
+  padding-left: 1rem;
+}
+@media (max-width: 991px) {
+  .contacto-section { padding: 1.2rem 0 2.7rem 0; min-height: 86vh;}
+  .contacto-form { max-width: 97vw; }
+  .contacto-title { font-size: 2.7rem;}
+  .contacto-label { font-size: 1.1rem;}
+  .contacto-btn { font-size: 1.3rem;}
+}
+@media (max-width: 600px) {
+  .contacto-section { padding: 0.7rem 0 1.7rem 0; min-height: 77vh;}
+  .contacto-card { padding: 0.7rem 0.2rem 1.7rem 0.2rem;}
+  .contacto-title { font-size: 2.1rem; margin-bottom: 0.7em;}
+  .contacto-label { font-size: 1rem;}
+  .contacto-btn { font-size: 1.1rem; padding: 0.9rem 0;}
+  .contacto-desc { font-size: 1rem;}
+  .contacto-form { max-width: 99vw;}
+  .contacto-input { font-size: 1.1rem; padding: 1.05rem 1rem 1.05rem 2.7rem;}
+}
 
   </style>
   <!-- CSS asíncrono para el resto -->
@@ -703,11 +918,11 @@
   <div id="intro-video-overlay"
   style="position: fixed;z-index: 99999;top: 0; left: 0; width: 100vw; height: 100vh;background: #000;display: flex;align-items:center; justify-content: center;transition: opacity 0.5s;opacity: 1;pointer-events: auto;">
   <video id="intro-video" muted autoplay playsinline preload="auto" style="width: 100vw; height: 100vh; object-fit: cover; background:#000; display: block; cursor:pointer" tabindex="0"></video>
-<div id="tap-instruction" style="position:absolute;left:0;top:0;width:100vw;height:100vh;display:flex;align-items:flex-start;justify-content:center;pointer-events:none;">
-  <span style="color:#fff;font-size:1.4em;background:rgba(0,0,0,0.35);border-radius:1em;padding:1em 2em;margin-top:1.5rem;display:none;" id="tap-to-play-msg">
-    Pulsa para ver la bienvenida
-  </span>
-</div>
+  <div id="tap-instruction" style="position:absolute;left:0;top:0;width:100vw;height:100vh;display:flex;align-items:flex-start;justify-content:center;pointer-events:none;">
+    <span style="color:#fff;font-size:1.4em;background:rgba(0,0,0,0.35);border-radius:1em;padding:1em 2em;margin-top:1.5rem;display:none;" id="tap-to-play-msg">
+      Pulsa para ver la bienvenida
+    </span>
+  </div>
 </div>
   <!-- Barra de progreso scroll -->
   <div id="scroll-progress"></div>
@@ -854,6 +1069,42 @@
         </div>
       </div>
     </section>
+
+    <section class="contacto-section" id="contacto-form">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-10 col-lg-8">
+            <div class="contacto-card">
+              <h2 class="contacto-title">¡Contáctanos¡</h2>
+              <p class="contacto-desc">Tu crecimiento no espera. Reserva tu asesoría ahora.</p>
+              <form class="contacto-form" id="formContacto" autocomplete="off" novalidate>
+                <div class="contacto-input-group">
+                  <span class="input-icon"><i class="fas fa-user"></i></span>
+                  <label for="nombre" class="form-label contacto-label">Nombre</label>
+                  <input type="text" class="form-control contacto-input" id="nombre" name="nombre" placeholder="Tu nombre" required autocomplete="name" />
+                  <span class="contacto-error-msg" id="error-nombre"></span>
+                </div>
+                <div class="contacto-input-group">
+                  <span class="input-icon"><i class="fas fa-envelope"></i></span>
+                  <label for="correo" class="form-label contacto-label">Correo electrónico</label>
+                  <input type="email" class="form-control contacto-input" id="correo" name="correo" placeholder="Correo electrónico" required autocomplete="email" />
+                  <span class="contacto-error-msg" id="error-correo"></span>
+                </div>
+                <div class="contacto-input-group">
+                  <span class="input-icon"><i class="fas fa-comment-dots"></i></span>
+                  <label for="mensaje" class="form-label contacto-label">Mensaje</label>
+                  <textarea class="form-control contacto-input" id="mensaje" name="mensaje" rows="4" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                  <span class="contacto-error-msg" id="error-mensaje"></span>
+                </div>
+                <button type="submit" class="btn btn-success contacto-btn w-100 fw-bold">Enviar mensaje</button>
+                <div id="form-status" class="mt-3 text-center" style="display:none"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- EQUIPO -->
     <section class="equipo-section" id="equipo">
       <h2 class="equipo-title">Nuestro equipo</h2>
@@ -1011,94 +1262,179 @@
   </script>
 
 <!---------- VIDEO DE BIENVENIDA SOLO 1ra VEZ ---------->
-<script>document.addEventListener("DOMContentLoaded", function () {
-  const overlay = document.getElementById('intro-video-overlay');
-  const video = document.getElementById('intro-video');
-  const tapMsg = document.getElementById('tap-to-play-msg');
-  const sessionKey = 'videoBienvenidaVisto-v3';
-
-  // Función para detectar si es un dispositivo móvil
-  function esMovil() {
-    return /Android|webOS|BlackBerry|Windows Phone|Opera Mini|IEMobile/i.test(navigator.userAgent);
-  }
-
-  // Función para detectar si es un dispositivo iOS
-  function esMovilApple() {
-    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  }
-
-  // Función para ocultar el overlay
-  function quitarOverlay() {
-    overlay.style.opacity = 0;
-    overlay.style.pointerEvents = "none";
-    document.body.style.overflow = "";
-    document.body.classList.add('animaciones-activas');
-  }
-
-  // Reemplazar el video por un GIF en dispositivos iPhone/iOS
-  if (esMovilApple()) {
-    const gif = document.createElement('img');
-    gif.src = "/videos_para_git_html/movil-git.gif";
-    gif.alt = "Bienvenida";
-    gif.style = "width: 100vw; height: 100vh; object-fit: cover; background: #000; display: block; cursor: pointer;";
-    overlay.replaceChild(gif, video);
-
-    // Ocultar el GIF después de 9 segundos
-    setTimeout(() => {
-      quitarOverlay();
-    }, 9000);
-
-    // Agregar evento de clic para ocultar el GIF
-    gif.addEventListener('click', quitarOverlay);
-  } else {
-    // Asignar el video según el dispositivo
-    video.src = "/videos_para_git_html/movil-git.mp4";
-
-    // Agregar eventos para ocultar el video
-    video.addEventListener('click', quitarOverlay);
-    video.addEventListener('touchend', quitarOverlay);
-    overlay.addEventListener('click', quitarOverlay);
-  }
-
-  function intentarPlay() {
-    if (!esMovilApple()) {
-      video.muted = true;
-      video.playsInline = true;
-      video.setAttribute('playsinline', '');
-      video.removeAttribute('controls');
-      let intento = video.play();
-      if (intento && intento.catch) intento.catch(() => {});
-    }
-  }
-
-  if (!sessionStorage.getItem(sessionKey)) {
-    overlay.style.opacity = "1";
-    overlay.style.pointerEvents = "auto";
-    document.body.style.overflow = "hidden";
-    document.body.classList.remove('animaciones-activas');
-    if (!esMovilApple()) video.currentTime = 0;
-    intentarPlay();
-    setTimeout(function () {
-      if (!esMovilApple() && video.paused) {
-        tapMsg.style.display = "inline-block";
-        window.addEventListener("touchstart", intentarPlay, { once: true, passive: true });
-        window.addEventListener("mousedown", intentarPlay, { once: true, passive: true });
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const overlay = document.getElementById('intro-video-overlay');
+      const video = document.getElementById('intro-video');
+      const tapMsg = document.getElementById('tap-to-play-msg');
+      const sessionKey = 'videoBienvenidaVisto-v3';
+    
+      // Función para detectar si es un dispositivo móvil
+      function esMovil() {
+        return /Android|webOS|BlackBerry|Windows Phone|Opera Mini|IEMobile/i.test(navigator.userAgent);
       }
-    }, 500);
-    video.addEventListener('ended', quitarOverlay);
-    video.addEventListener('error', () => setTimeout(quitarOverlay, 4000));
-    document.addEventListener('keydown', function (e) {
-      if (e.key === "Escape" && overlay.style.opacity !== "0") {
+    
+      // Función para detectar si es un dispositivo iOS
+      function esMovilApple() {
+        return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      }
+    
+      // Función para ocultar el overlay
+      function quitarOverlay() {
+        overlay.style.opacity = 0;
+        overlay.style.pointerEvents = "none";
+        document.body.style.overflow = "";
+        document.body.classList.add('animaciones-activas');
+      }
+    
+      // Reemplazar el video por un GIF en dispositivos iPhone/iOS
+      if (esMovilApple()) {
+        const gif = document.createElement('img');
+        gif.src = "/videos_para_git_html/movil-git.gif";
+        gif.alt = "Bienvenida";
+        gif.style = "width: 100vw; height: 100vh; object-fit: cover; background: #000; display: block; cursor: pointer;";
+        overlay.replaceChild(gif, video);
+    
+        // Ocultar el GIF después de 9 segundos
+        setTimeout(() => {
+          quitarOverlay();
+        }, 9000);
+    
+        // Agregar evento de clic para ocultar el GIF
+        gif.addEventListener('click', quitarOverlay);
+      } else {
+
+        // Haz esto:
+        video.src = "/videos_para_git_html/VB-git.mp4";
+    
+        // Agregar eventos para ocultar el video
+        video.addEventListener('click', quitarOverlay);
+        video.addEventListener('touchend', quitarOverlay);
+        overlay.addEventListener('click', quitarOverlay);
+      }
+    
+      function intentarPlay() {
+        if (!esMovilApple()) {
+          video.muted = true;
+          video.playsInline = true;
+          video.setAttribute('playsinline', '');
+          video.removeAttribute('controls');
+          let intento = video.play();
+          if (intento && intento.catch) intento.catch(() => {});
+        }
+      }
+    
+      if (!sessionStorage.getItem(sessionKey)) {
+        overlay.style.opacity = "1";
+        overlay.style.pointerEvents = "auto";
+        document.body.style.overflow = "hidden";
+        document.body.classList.remove('animaciones-activas');
+        if (!esMovilApple()) video.currentTime = 0;
+        intentarPlay();
+        setTimeout(function () {
+          if (!esMovilApple() && video.paused) {
+            tapMsg.style.display = "inline-block";
+            window.addEventListener("touchstart", intentarPlay, { once: true, passive: true });
+            window.addEventListener("mousedown", intentarPlay, { once: true, passive: true });
+          }
+        }, 500);
+        video.addEventListener('ended', quitarOverlay);
+        video.addEventListener('error', () => setTimeout(quitarOverlay, 4000));
+        document.addEventListener('keydown', function (e) {
+          if (e.key === "Escape" && overlay.style.opacity !== "0") {
+            quitarOverlay();
+          }
+        });
+        setTimeout(quitarOverlay, 15000);
+        sessionStorage.setItem(sessionKey, "1");
+      } else {
         quitarOverlay();
       }
     });
-    setTimeout(quitarOverlay, 15000);
-    sessionStorage.setItem(sessionKey, "1");
-  } else {
-    quitarOverlay();
+
+    document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("formContacto");
+  const statusDiv = document.getElementById("form-status");
+  const nombre = document.getElementById("nombre");
+  const correo = document.getElementById("correo");
+  const mensaje = document.getElementById("mensaje");
+  const errorNombre = document.getElementById("error-nombre");
+  const errorCorreo = document.getElementById("error-correo");
+  const errorMensaje = document.getElementById("error-mensaje");
+
+  function validarNombre(valor) {
+    if (!valor.trim()) return "El nombre es obligatorio.";
+    if (valor.trim().length < 2) return "Introduce al menos 2 caracteres.";
+    if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s'-]+$/.test(valor.trim())) return "Solo letras y espacios.";
+    return "";
   }
+  function validarCorreo(valor) {
+    if (!valor.trim()) return "El correo es obligatorio.";
+    // Regex simple para email válido
+    if (!/^[\w\.-]+@[\w\.-]+\.\w{2,}$/.test(valor.trim())) return "Correo no válido.";
+    return "";
+  }
+  function validarMensaje(valor) {
+    if (!valor.trim()) return "El mensaje es obligatorio.";
+    if (valor.trim().length < 10) return "Escribe al menos 10 caracteres.";
+    return "";
+  }
+
+  function mostrarError(input, errorMsg, errorSpan) {
+    if (errorMsg) {
+      input.classList.add("error");
+      errorSpan.textContent = errorMsg;
+    } else {
+      input.classList.remove("error");
+      errorSpan.textContent = "";
+    }
+  }
+
+  // Validación en tiempo real
+  nombre.addEventListener("input", () => mostrarError(nombre, validarNombre(nombre.value), errorNombre));
+  correo.addEventListener("input", () => mostrarError(correo, validarCorreo(correo.value), errorCorreo));
+  mensaje.addEventListener("input", () => mostrarError(mensaje, validarMensaje(mensaje.value), errorMensaje));
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    let valido = true;
+
+    const nombreError = validarNombre(nombre.value);
+    const correoError = validarCorreo(correo.value);
+    const mensajeError = validarMensaje(mensaje.value);
+
+    mostrarError(nombre, nombreError, errorNombre);
+    mostrarError(correo, correoError, errorCorreo);
+    mostrarError(mensaje, mensajeError, errorMensaje);
+
+    if (nombreError || correoError || mensajeError) {
+      valido = false;
+    }
+
+    if (!valido) {
+      statusDiv.style.display = "block";
+      statusDiv.textContent = "Corrige los errores antes de enviar.";
+      statusDiv.style.background = "linear-gradient(90deg, #e63946 60%, #0e369c 100%)";
+      setTimeout(() => { statusDiv.style.display = "none"; }, 3500);
+      return;
+    }
+
+    statusDiv.style.display = "block";
+    statusDiv.textContent = "Enviando...";
+    statusDiv.style.background = "linear-gradient(90deg, #02b602 60%, #0e369c 100%)";
+    form.querySelector("button[type=submit]").disabled = true;
+
+    // Simular envío...
+    setTimeout(function () {
+      statusDiv.textContent = "¡Mensaje enviado! Pronto nos pondremos en contacto.";
+      statusDiv.style.background = "linear-gradient(90deg, #02b602 60%, #0e369c 100%)";
+      form.reset();
+      form.querySelector("button[type=submit]").disabled = false;
+      setTimeout(() => { statusDiv.style.display = "none"; }, 3500);
+    }, 1200);
+  });
 });
-</script>
+  </script>
   <!-- Bootstrap JS con defer -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
 </body>
